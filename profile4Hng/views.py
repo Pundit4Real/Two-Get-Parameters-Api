@@ -27,13 +27,13 @@ class SlackFirstTask(APIView):
         # You can convert it to a string if needed
         day_name = current_accra_time.strftime('%A')
 
-        slack_name = request.GET.get("slack_name", "Mohammed Ali")
-        track = request.GET.get("track", "Backend")
+        slack_name = request.query_params.get("slack_name", "Mohammed Ali")
+        track = request.query_params.get("track", "Backend")
         if not slack_name:
             return Response({"message": "slack_name must not be empty"}, status=status.HTTP_400_BAD_REQUEST)
         if not track:
             return Response({"message": "track must not be empty"}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         data = {
             "slack_name": slack_name,
             "current_day": day_name,
